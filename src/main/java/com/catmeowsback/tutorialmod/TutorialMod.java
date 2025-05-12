@@ -1,6 +1,8 @@
 package com.catmeowsback.tutorialmod;
 
+import com.catmeowsback.tutorialmod.item.ModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -35,6 +37,9 @@ public class TutorialMod
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
+        ModItems.register(modEventBus);
+
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -42,15 +47,15 @@ public class TutorialMod
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
 
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.ALEXANDRITE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
