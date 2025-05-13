@@ -1,5 +1,6 @@
 package com.catmeowsback.tutorialmod;
 
+import com.catmeowsback.tutorialmod.block.ModBlocks;
 import com.catmeowsback.tutorialmod.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -38,6 +39,7 @@ public class TutorialMod
         MinecraftForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -58,6 +60,10 @@ public class TutorialMod
             event.accept(ModItems.RAW_ALEXANDRITE);
 
 
+        }
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
         }
     }
 
